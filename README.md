@@ -1,84 +1,85 @@
+
+
 # 🖊️ Digit Recognizer Web App
 
 🔗 **Live Demo:** [digit-recognize.onrender.com](https://digit-recognize.onrender.com)
-This is a web application built with Python and Flask that serves a machine learning model for digit recognition. The application is configured for production deployment on the Render platform using Gunicorn.
 
------
+A **Flask-based web application** that serves a **machine learning model** for **digit recognition**.
+Configured for **production deployment** on **Render** with **Gunicorn**.
 
+---
 
+## ⚙️ Technologies
 
+* **Backend:** Flask
+* **Machine Learning:** TensorFlow
+* **WSGI Server:** Gunicorn
+* **Database Connector:** Psycopg2
+* **Core Libraries:** NumPy, Matplotlib
 
+---
 
-## Technologies Used
-
-  * **Backend**: **Flask**
-  * **Machine Learning**: **TensorFlow**
-  * **WSGI Server**: **Gunicorn**
-  * **Database Connector**: **Psycopg2**
-  * **Core Libraries**: **NumPy**, **Matplotlib**
-
------
-
-## Project Structure
+## 📂 Project Structure
 
 ```
-.
-├── app.py                  # Main Flask application file
-├── requirements.txt        # Python dependencies for pip
-├── render.yaml             # Deployment configuration for Render
-├── environment.yml         # (Alternative) Conda environment definition
-├── run.sh                  # Script for local development setup
-└── README.md               # Project documentation
+digit_recognize/
+├── app.py              # Main Flask app
+├── requirements.txt    # pip dependencies
+├── render.yaml         # Render deployment config
+├── environment.yml     # (Optional) Conda env file
+├── run.sh              # Local dev setup script
+└── README.md           # Project documentation
 ```
 
------
+---
 
-## How to Run Locally
+## 🚀 Running Locally
 
-This project uses `uv` for fast environment setup, but you can use any virtual environment manager.
+This project uses **uv** (fast Python installer), but works with any virtual environment.
 
-1.  **Clone the repository:**
+1. **Clone the repository**
 
-    ```bash
-    git clone https://github.com/takeaname1o1/digit_recognize.git
-    cd digit_recognize
-    ```
+```bash
+git clone https://github.com/takeaname1o1/digit_recognize.git
+cd digit_recognize
+```
 
-2.  **Create and activate a virtual environment:** The included `run.sh` script uses `uv`, a fast Python package installer.
+2. **Create & activate a virtual environment**
 
-    ```bash
-    # Create the virtual environment for Python 3.8
-    python3.8 -m venv .venv
+```bash
+# For Python 3.8
+python3.8 -m venv .venv
+source .venv/bin/activate
+```
 
-    # Activate it
-    source .venv/bin/activate
-    ```
+3. **Install dependencies**
 
-3.  **Install the dependencies:**
+```bash
+pip install -r requirements.txt
+```
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+4. **Start the app**
 
-4.  **Run the application:**
+```bash
+python app.py
+```
 
-    ```bash
-    python app.py
-    ```
+App will be available at 👉 `http://0.0.0.0:5000`
 
-    The application will be running on `http://0.0.0.0:5000`.
+---
 
------
+## ☁️ Deployment on Render
 
-## Deployment on Render
+This app is **deployment-ready** with `render.yaml`.
 
-This application is configured for easy deployment on Render using a `render.yaml` file.
+1. Push code to GitHub / GitLab / Bitbucket
+2. In **Render Dashboard** → click **“New +” → “Web Service”**
+3. Connect your repo
+4. Render auto-detects `render.yaml` and applies:
 
-1.  **Push your code** to a GitHub, GitLab, or Bitbucket repository.
-2.  On the **Render Dashboard**, click **"New +"** and select **"Web Service"**.
-3.  Connect your repository.
-4.  Render will automatically detect and use the `render.yaml` file to configure the service. The key settings from the file are:
-      * **Python Version**: `3.8.10`
-      * **Build Command**: `pip install -r requirements.txt`
-      * **Start Command**: `gunicorn app:app`
-5.  Click **"Create Web Service"** to deploy. The application will be live at the URL provided by Render upon successful build.
+   * **Python:** `3.8.10`
+   * **Build Command:** `pip install -r requirements.txt`
+   * **Start Command:** `gunicorn app:app`
+5. Click **“Create Web Service”** → live URL provided on success 🚀
+
+---
