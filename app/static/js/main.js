@@ -21,14 +21,29 @@ window.onload = () => {
     /* The purpose of the first clear is to fill the canvas with a white background. */
     clear();
 
-    function getPosition(clientX, clientY) {
+    // MODIFIED: This function now handles both mouse and touch events to get coordinates.
+    function getPosition(e) {
         let box = canvas.getBoundingClientRect();
-        return {x: clientX - box.x, y: clientY - box.y}
+        let clientX, clientY;
+
+        // Check if it's a touch event
+        if (e.touches && e.touches.length > 0) {
+            clientX = e.touches[0].clientX;
+            clientY = e.touches[0].clientY;
+        } else {
+            // It's a mouse event
+            clientX = e.clientX;
+            clientY = e.clientY;
+        }
+        return {x: clientX - box.left, y: clientY - box.top}
     }
 
     function draw(e) {
+        // MODIFIED: Prevent default behaviors like scrolling on touch devices.
+        e.preventDefault();
+
         if (isDrawing) {
-            let pos = getPosition(e.clientX, e.clientY);
+            let pos = getPosition(e);
             ctx.strokeStyle = lineColor;
             ctx.lineWidth = lineWidth;
             ctx.lineCap = "round";
@@ -42,17 +57,16 @@ window.onload = () => {
         }
     }
 
-    canvas.onmousedown = function (e) {
+    // --- Event Handlers Setup ---
+    
+    function start(e) {
         isDrawing = true;
-        curPos = getPosition(e.clientX, e.clientY);
+        curPos = getPosition(e);
         draw(e);
-    };
-
-    canvas.onmousemove = function (e) {
-        draw(e);
-    };
-
-    canvas.onmouseup = function (e) {
+    }
+    
+    function stop() {
+        if (!isDrawing) return;
         isDrawing = false;
 
         const img = new Image();
@@ -110,7 +124,20 @@ window.onload = () => {
                 }
             });
         };
-    };
+    }
+
+    // MODIFIED: Switched to addEventListener for better compatibility.
+    // Mouse Events
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mousemove', draw);
+    canvas.addEventListener('mouseup', stop);
+    canvas.addEventListener('mouseout', stop);
+
+    // MODIFIED: Added corresponding touch events.
+    // Touch Events
+    canvas.addEventListener('touchstart', start);
+    canvas.addEventListener('touchmove', draw);
+    canvas.addEventListener('touchend', stop);
 
     reset.onclick = clear;
 
