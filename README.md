@@ -1,8 +1,13 @@
-# Digit Recognizer Web App
+# 🖊️ Digit Recognizer Web App
 
+🔗 **Live Demo:** [digit-recognize.onrender.com](https://digit-recognize.onrender.com)
 This is a web application built with Python and Flask that serves a machine learning model for digit recognition. The application is configured for production deployment on the Render platform using Gunicorn.
 
 -----
+
+
+
+
 
 ## Technologies Used
 
