@@ -1,9 +1,11 @@
 
 
 # 🖊️ Digit Recognizer Web App
-
 🔗 **Live Demo:** [digit-recognize.onrender.com](https://digit-recognize.onrender.com)
-[Watch Demo](DEMO.mp4)
+
+
+![Demo GIF](DEMO.gif)
+
 
 A **Flask-based web application** that serves a **machine learning model** for **digit recognition**.
 Configured for **production deployment** on **Render** with **Gunicorn**.
