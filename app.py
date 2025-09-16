@@ -1,13 +1,16 @@
-from flask import Flask
+from flask import Flask, render_template
 
 # The Flask application object
-app = Flask(__name__)
+# Correctly point to the static and template folders inside the 'app' directory
+app = Flask(__name__,
+            static_folder='app/static',
+            template_folder='app/templates')
 
-# Your routes and other application logic go here
+# This route will now find and render your index.html page
 @app.route('/')
-def hello_world():
-    return 'Hello, from your Digit Recognizer!'
+def home():
+    return render_template('index.html')
 
-# This part is for local development and won't be used by Gunicorn
+# This part is for local development and won't be used by Gunicorn/SWA
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
